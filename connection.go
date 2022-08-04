@@ -260,7 +260,7 @@ func (c *conn) Read(p []byte) (n int, err error) {
 	if c.inboundBuffer.IsEmpty() {
 		n = copy(p, c.buffer)
 		c.buffer = c.buffer[n:]
-		return n, nil
+		return n, io.EOF
 	}
 	n, _ = c.inboundBuffer.Read(p)
 	if n == len(p) {
